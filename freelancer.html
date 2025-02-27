@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.pexels.com/photos/461064/pexels-photo-461064.jpeg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #28a745;
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function registerFreelancer(event) {
+            event.preventDefault();
+            let name = document.getElementById("freelancerName").value;
+            let age = document.getElementById("freelancerAge").value;
+            let email = document.getElementById("freelancerEmail").value;
+            let contact = document.getElementById("freelancerContact").value;
+            let skills = document.getElementById("freelancerSkills").value;
+            let experience = document.getElementById("freelancerExperience").value;
+
+            let freelancerData = { name, age, email, contact, skills, experience };
+            localStorage.setItem("freelancer", JSON.stringify(freelancerData));
+
+            alert("Freelancer Registered Successfully!");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Register as Freelancer</h2>
+        <form onsubmit="registerFreelancer(event)">
+            <input type="text" id="freelancerName" placeholder="Full Name" required>
+            <input type="number" id="freelancerAge" placeholder="Age" required>
+            <input type="email" id="freelancerEmail" placeholder="Email" required>
+            <input type="tel" id="freelancerContact" placeholder="Contact No." required>
+            <input type="text" id="freelancerSkills" placeholder="Skills" required>
+            <input type="text" id="freelancerExperience" placeholder="Experience (in years)" required>
+            <button type="submit">Register as Freelancer</button>
+        </form>
+    </div>
+</body>
+</html>

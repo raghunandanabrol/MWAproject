@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Registration & Hire Freelancer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .client-btn {
+            background: #007bff;
+            color: white;
+        }
+        .hire-btn {
+            background: #ffc107;
+            color: black;
+        }
+        .info-box {
+            text-align: left;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function registerClient(event) {
+            event.preventDefault();
+            let name = document.getElementById("clientName").value;
+            let company = document.getElementById("clientCompany").value;
+            let contact = document.getElementById("clientContact").value;
+            let skill = document.getElementById("clientSkill").value;
+
+            let clientData = { name, company, contact, skill };
+            localStorage.setItem("client", JSON.stringify(clientData));
+
+            alert("Client Registered Successfully!");
+        }
+
+        function loadFreelancerData() {
+            let freelancer = localStorage.getItem("freelancer");
+            if (freelancer) {
+                freelancer = JSON.parse(freelancer);
+                document.getElementById("freelancerDetails").innerHTML = `
+                    <h3>Available Freelancer</h3>
+                    <p><strong>Name:</strong> ${freelancer.name}</p>
+                    <p><strong>Age:</strong> ${freelancer.age}</p>
+                    <p><strong>Email:</strong> ${freelancer.email}</p>
+                    <p><strong>Contact:</strong> ${freelancer.contact}</p>
+                    <p><strong>Skills:</strong> ${freelancer.skills}</p>
+                    <p><strong>Experience:</strong> ${freelancer.experience} years</p>
+                    <button onclick="hireFreelancer()" class="hire-btn">Hire This Freelancer</button>
+                `;
+            } else {
+                document.getElementById("freelancerDetails").innerHTML = "<p>No freelancer data found.</p>";
+            }
+        }
+
+        function hireFreelancer() {
+            alert("You have successfully hired this freelancer!");
+        }
+
+        window.onload = loadFreelancerData;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Register as Client</h2>
+        <form onsubmit="registerClient(event)">
+            <input type="text" id="clientName" placeholder="Full Name" required>
+            <input type="text" id="clientCompany" placeholder="Company Name" required>
+            <input type="tel" id="clientContact" placeholder="Contact No." required>
+            <input type="text" id="clientSkill" placeholder="Looking for Skill (e.g., Web Dev)" required>
+            <button type="submit" class="client-btn">Register as Client</button>
+        </form>
+
+        <hr>
+
+        <div id="freelancerDetails" class="info-box"></div>
+    </div>
+</body>
+</html>
